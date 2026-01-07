@@ -279,7 +279,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
             <div className="form-title">Descarga el Playbook 50K</div>
 
             <p className="form-sub">
-              Déjanos tus datos y te enviamos el Playbook 50K a tu correo para que
+              Déjanos tus datos y descarga el Playbook 50K para que
               puedas empezar a aplicarlo hoy mismo.
             </p>
 
@@ -294,8 +294,8 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
               />
               <input
                 className="field field-margin-top"
-                type="email"
-                placeholder="Tu mejor email"
+                type="tel"
+                placeholder="Tu teléfono"
                 name="email"
                 required
               />
@@ -338,7 +338,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
               {status === "ok" && (
                 <p className="form-status form-status--ok">
-                  ✅ Todo correcto. Revisa tu correo en unos minutos.
+                  ✅ Todo correcto. El Playbook se está descargando.
                 </p>
               )}
               {status === "error" && (
