@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwaQjE_ZYohQg4aZZALVOStyXUk6ktpWD2pfI4o77j94ObLudCzuuC6j7d2nnAbBxyQzQ/exec"; // <- pon aquí la URL de tu Apps Script
+// API route para guardar leads en nuestra base de datos
+const LEADS_API_URL = "/api/leads";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(false);
@@ -17,28 +18,38 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   const form = e.currentTarget;
   const formData = new FormData(form);
 
-  // Estos nombres coinciden con los parámetros que espera Apps Script
-  formData.set("name", String(formData.get("name") || ""));
-  formData.set("email", String(formData.get("email") || ""));
-  formData.set("hasClinic", String(formData.get("clinic") || ""));
-  formData.set("billing", String(formData.get("revenue") || ""));
-  formData.set("mainBlock", String(formData.get("challenge") || ""));
+  // Extraer los datos del formulario
+  const data = {
+    name: String(formData.get("name") || ""),
+    phone: String(formData.get("phone") || ""),
+    email: String(formData.get("email") || ""),
+    clinic: String(formData.get("clinic") || ""),
+    revenue: String(formData.get("revenue") || ""),
+    challenge: String(formData.get("challenge") || ""),
+  };
 
   try {
-    await fetch(GOOGLE_SCRIPT_URL, {
+    const response = await fetch(LEADS_API_URL, {
       method: "POST",
-      body: formData,
-      mode: "no-cors", // evitamos líos de CORS y preflight
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
 
-    // Si no ha petado la red, damos por bueno el envío
-    setStatus("ok");
-    form.reset();
+    const result = await response.json();
 
-    // Descarga automática del Playbook
-    window.location.href = "/Playbook-50K.pdf";
+    if (result.success) {
+      setStatus("ok");
+      form.reset();
+
+      // Descarga automática del Playbook
+      window.location.href = "/Playbook-50K.pdf";
+    } else {
+      setStatus("error");
+    }
   } catch (error) {
-    console.error("Error al enviar al Google Script:", error);
+    console.error("Error al enviar el formulario:", error);
     setStatus("error");
   } finally {
     setLoading(false);
@@ -296,6 +307,13 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                 className="field field-margin-top"
                 type="tel"
                 placeholder="Tu teléfono"
+                name="phone"
+                required
+              />
+              <input
+                className="field field-margin-top"
+                type="email"
+                placeholder="Tu email"
                 name="email"
                 required
               />
