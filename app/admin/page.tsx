@@ -14,6 +14,7 @@ interface Lead {
   challenge: string | null;
   created_at: string;
   status?: string;
+  notes?: string | null;
 }
 
 export default function AdminPage() {
