@@ -29,6 +29,7 @@ export default function AdminPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [statusFilter, setStatusFilter] = useState<string>("ALL");
+  const [revenueFilter, setRevenueFilter] = useState<string>("ALL");
 
   // Verificar autenticación al cargar
   useEffect(() => {
@@ -101,17 +102,34 @@ export default function AdminPage() {
     new Set(leads.map((lead) => lead.status || "LEAD"))
   ).sort();
 
-  // Filtrar leads según el filtro de estado
+  // Obtener todos los valores de facturación únicos
+  const allRevenues = Array.from(
+    new Set(leads.map((lead) => lead.revenue || "").filter(Boolean))
+  ).sort();
+
+  // Filtrar leads según el filtro de estado y facturación
   const filteredLeads = leads.filter((lead) => {
     const leadStatus = lead.status || "LEAD";
+    const leadRevenue = lead.revenue || "";
     
-    // Si el filtro es "ALL", mostrar todos excepto los ocultos (a menos que se filtren explícitamente)
+    // Filtro por estado
+    let statusMatch = false;
     if (statusFilter === "ALL") {
-      return !HIDDEN_STATUSES.includes(leadStatus);
+      statusMatch = !HIDDEN_STATUSES.includes(leadStatus);
+    } else {
+      statusMatch = leadStatus === statusFilter;
     }
     
-    // Si el filtro es un estado específico, mostrar solo ese estado
-    return leadStatus === statusFilter;
+    // Filtro por facturación
+    let revenueMatch = false;
+    if (revenueFilter === "ALL") {
+      revenueMatch = true;
+    } else {
+      revenueMatch = leadRevenue === revenueFilter;
+    }
+    
+    // Ambos filtros deben cumplirse
+    return statusMatch && revenueMatch;
   });
 
   // Leads visibles (ya filtrados)
@@ -435,6 +453,34 @@ export default function AdminPage() {
                   <option value="RESERVA">RESERVA</option>
                   <option value="CONVERTIDO">CONVERTIDO</option>
                   <option value="NO INTERESA">NO INTERESA</option>
+                </select>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <label style={{ fontSize: "0.875rem", color: "#cbd5f5" }}>
+                  Facturación:
+                </label>
+                <select
+                  value={revenueFilter}
+                  onChange={(e) => {
+                    setRevenueFilter(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  style={{
+                    padding: "0.5rem",
+                    backgroundColor: "#020617",
+                    border: "1px solid rgba(148, 163, 184, 0.4)",
+                    borderRadius: "6px",
+                    color: "#e5e7eb",
+                    fontSize: "0.875rem",
+                    cursor: "pointer"
+                  }}
+                >
+                  <option value="ALL">Todas</option>
+                  {allRevenues.map((revenue) => (
+                    <option key={revenue} value={revenue}>
+                      {revenue}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
