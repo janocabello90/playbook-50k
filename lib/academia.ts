@@ -11,10 +11,15 @@ const ACADEMIA_TIMEOUT_MS = 8000;
 function splitFullName(fullName: string): { firstName: string; lastName: string } {
   const trimmed = fullName.trim().replace(/\s+/g, " ");
   const [firstName, ...rest] = trimmed.split(" ");
+  const lastName = rest.join(" ");
 
+  // La Academia exige firstName y lastName como campos no vacíos. Si el lead
+  // solo dio un nombre (sin apellido), repetimos el nombre en lastName en
+  // vez de mandar "" — de lo contrario la API responde 400 y el lead nunca
+  // llega a invitarse.
   return {
     firstName: firstName || trimmed,
-    lastName: rest.join(" "),
+    lastName: lastName || firstName || trimmed,
   };
 }
 
