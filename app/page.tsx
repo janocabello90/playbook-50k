@@ -42,9 +42,6 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     if (result.success) {
       setStatus("ok");
       form.reset();
-
-      // Descarga automática del Playbook
-      window.location.href = "/Playbook-50K.pdf";
     } else {
       setStatus("error");
     }
@@ -112,7 +109,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
             </div>
 
             <div className="hero-badge-secondary">
-              Mira los vídeos ↓ y cuando lo tengas claro, descarga el Playbook y aplícalo.
+              Regístrate ↓ y accede gratis a los 5 vídeos y al Playbook en la Academia.
             </div>
           </div>
 
@@ -131,120 +128,6 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
               </ul>
             </div>
           </aside>
-        </section>
-
-        {/* VIDEOS */}
-        <section>
-          <h2 className="section-title">
-            5 vídeos → claridad, criterio y dirección
-          </h2>
-          <p className="section-sub">
-            Míralos en orden. Cada uno te prepara para aplicar el Playbook y no
-            perder el tiempo en acciones que no mueven la aguja.
-          </p>
-
-          <div className="steps-grid">
-            {/* VIDEO 1 */}
-            <article className="step-card">
-              <div className="step-label">Vídeo 1</div>
-              <div className="step-title">
-                Poner rumbo: tus primeros 50K con cabeza
-              </div>
-              <p className="step-text">
-                Entender hacia dónde vas y por qué. Definir tu “buena vida”,
-                traducirla a números y dejar de hacer cosas sin dirección.
-              </p>
-              <div className="video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/_ru04hMa_As"
-                  title="Video 1"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </article>
-
-            {/* VIDEO 2 */}
-            <article className="step-card">
-              <div className="step-label">Vídeo 2</div>
-              <div className="step-title">
-                Family, Friends &amp; Fools: tus primeros pacientes correctos
-              </div>
-              <p className="step-text">
-                Quién te conoce, quién confía en ti, quién encaja y quién no.
-                Deja de aceptar a cualquiera y empieza a elegir mejor a quién ayudas.
-              </p>
-              <div className="video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/WNuAfg4DXSc"
-                  title="Video 2"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </article>
-
-            {/* VIDEO 3 */}
-            <article className="step-card">
-              <div className="step-label">Vídeo 3</div>
-              <div className="step-title">
-                Propuesta de valor: recurrencia y seguridad
-              </div>
-              <p className="step-text">
-                Diseñar servicios que aportan tanto valor que el precio deja de
-                ser el problema. Más valor, mejores precios, menos estrés.
-              </p>
-              <div className="video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/w3xP1okApKw"
-                  title="Video 3"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </article>
-
-            {/* VIDEO 4 */}
-            <article className="step-card">
-              <div className="step-label">Vídeo 4</div>
-              <div className="step-title">
-                El Iceberg de problemas: dejar de parchear
-              </div>
-              <p className="step-text">
-                Problemas explícitos, implícitos, funcionales y emocionales.
-                Si entiendes esto, dejas de competir por precio y empiezas a
-                competir por valor real.
-              </p>
-              <div className="video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/Wb61RYnp3rQ"
-                  title="Video 4"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </article>
-
-            {/* VIDEO 5 */}
-            <article className="step-card">
-              <div className="step-label">Vídeo 5</div>
-              <div className="step-title">
-                Matriz MERCI: escalar con señal y autoridad
-              </div>
-              <p className="step-text">
-                Reputación, entorno, reseñas, contenido e información. Cómo
-                construir señal de “referente” en tu zona sin postureo ni humo.
-              </p>
-              <div className="video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/XmJ6y9eRj9w"
-                  title="Video 5"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </article>
-          </div>
         </section>
 
         {/* QUÉ ES EL PLAYBOOK */}
@@ -287,11 +170,11 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
           {/* FORM */}
           <aside className="form-card">
-            <div className="form-title">Descarga el Playbook 50K</div>
+            <div className="form-title">Accede al Playbook 50K</div>
 
             <p className="form-sub">
-              Déjanos tus datos y descarga el Playbook 50K para que
-              puedas empezar a aplicarlo hoy mismo.
+              Déjanos tus datos: te enviaremos un email para crear tu cuenta
+              gratuita, ver los 5 vídeos y descargar el Playbook 50K.
             </p>
 
             <form onSubmit={handleSubmit}>
@@ -351,12 +234,14 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
               </p>
 
               <button className="btn-primary" type="submit" disabled={loading}>
-                {loading ? "Enviando..." : "Descargar Playbook 50K"}
+                {loading ? "Enviando..." : "Quiero acceder al Playbook 50K"}
               </button>
 
               {status === "ok" && (
                 <p className="form-status form-status--ok">
-                  ✅ Todo correcto. El Playbook se está descargando.
+                  ✅ ¡Listo! Revisa tu email — te hemos enviado el enlace para
+                  crear tu cuenta gratuita y empezar a ver los 5 vídeos. Al
+                  completarlos, podrás descargar tu Playbook.
                 </p>
               )}
               {status === "error" && (
@@ -366,9 +251,9 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
               )}
 
               <p className="privacy">
-                No hacemos spam. Usaremos estos datos para enviarte el Playbook y
-                contenido útil sobre cómo mejorar tu clínica. Puedes darte de baja
-                cuando quieras.
+                No hacemos spam. Usaremos estos datos para darte acceso al
+                Playbook y a contenido útil sobre cómo mejorar tu clínica.
+                Puedes darte de baja cuando quieras.
               </p>
             </form>
           </aside>

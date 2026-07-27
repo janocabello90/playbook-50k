@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-import { sendOnboardingEmail } from '@/lib/email';
+import { notifyAcademia } from '@/lib/academia';
 
 export async function POST(request: NextRequest) {
   try {
@@ -40,15 +40,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Enviar email de onboarding (no bloquea la respuesta si falla)
-    try {
-      const emailResult = await sendOnboardingEmail(email, name);
-      if (!emailResult.success) {
-        console.error('⚠️ Email no enviado (no crítico):', emailResult.error);
-      }
-    } catch (emailError) {
-      // Log del error pero no fallamos la petición
-      console.error('⚠️ Error al enviar email de onboarding (no crítico):', emailError);
+    // Invitar al lead a la Academia FisioReferentes (knaas.vercel.app).
+    // Es su API la que envía el email de acceso; si falla, lo logueamos
+    // pero no hacemos fallar el guardado del lead.
+    const academiaResult = await notifyAcademia(email, name);
+    if (!academiaResult.ok) {
+      console.error('⚠️ No se pudo invitar al lead a la Academia (no crítico):', academiaResult.error);
     }
 
     return NextResponse.json({

@@ -191,63 +191,6 @@ h1 {
   max-width: 600px;
 }
 
-/* PASOS */
-
-.steps-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 40px;
-}
-
-.step-card {
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 14px;
-  padding: 14px 14px 16px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-}
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-
-.step-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #9ca3af;
-  margin-bottom: 4px;
-}
-
-.step-title {
-  color: #FFD54A;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: .3px;
-  @media (max-width: 768px) {
-  .step-title {
-    font-size: 1.1rem;
-  }
-}
-}
-
-.step-text {
-  font-size: 13px;
-  color: #cbd5f5;
-}
-
 /* LAYOUT INFERIOR */
 
 .layout-bottom {
@@ -393,17 +336,7 @@ textarea.field {
   }
 }
 
-@media (max-width: 900px) {
-  .steps-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 640px) {
-  .steps-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .layout-bottom {
     grid-template-columns: minmax(0, 1fr);
   }
