@@ -35,8 +35,8 @@ export default function GraciasPage() {
       </div>
 
       <div className="foot">
-        © {new Date().getFullYear()} fisioreferentes · Aviso legal ·
-        Privacidad
+        © {new Date().getFullYear()} fisioreferentes · Ayudamos a dueños de
+        clínicas a vivir mejor gracias a negocios mejor diseñados.
       </div>
     </div>
   );

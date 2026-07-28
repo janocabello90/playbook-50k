@@ -173,8 +173,8 @@ export default function HomePage() {
                 <span>⚡ Acceso inmediato</span>
               </div>
               <div className="author">
-                <i></i> Por Jano Cabello · Fisioreferentes — ayudamos a
-                dueños de clínicas a vivir mejor.
+                <i></i> Por Fisioreferentes — ayudamos a dueños de clínicas a
+                vivir mejor.
               </div>
             </form>
           </div>
@@ -198,8 +198,8 @@ export default function HomePage() {
       </div>
 
       <div className="foot">
-        © {new Date().getFullYear()} fisioreferentes · Aviso legal ·
-        Privacidad
+        © {new Date().getFullYear()} fisioreferentes · Ayudamos a dueños de
+        clínicas a vivir mejor gracias a negocios mejor diseñados.
       </div>
     </div>
   );
