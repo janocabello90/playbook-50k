@@ -13,13 +13,13 @@ function splitFullName(fullName: string): { firstName: string; lastName: string 
   const [firstName, ...rest] = trimmed.split(" ");
   const lastName = rest.join(" ");
 
-  // La Academia exige firstName y lastName como campos no vacíos. Si el lead
-  // solo dio un nombre (sin apellido), repetimos el nombre en lastName en
-  // vez de mandar "" — de lo contrario la API responde 400 y el lead nunca
-  // llega a invitarse.
+  // La Academia exige firstName y lastName como campos no vacíos. El nuevo
+  // formulario solo pide "Nombre" (sin apellido), así que si no hay apellido
+  // mandamos "-" en vez de "" — de lo contrario la API responde 400 y el
+  // lead nunca llega a invitarse.
   return {
     firstName: firstName || trimmed,
-    lastName: lastName || firstName || trimmed,
+    lastName: lastName || '-',
   };
 }
 

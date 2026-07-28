@@ -5,26 +5,27 @@ import { notifyAcademia } from '@/lib/academia';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
-    const { name, phone, email, clinic, revenue, challenge } = body;
 
-    // Validar campos requeridos
-    if (!name || !phone || !email) {
+    const { name, email, revenue, challenge } = body;
+
+    // Validar campos requeridos (el teléfono ya no se pide en el formulario)
+    if (!name || !email) {
       return NextResponse.json(
-        { success: false, error: 'Faltan campos requeridos: name, phone, email' },
+        { success: false, error: 'Faltan campos requeridos: name, email' },
         { status: 400 }
       );
     }
 
-    // Guardar el lead en Supabase
+    // Guardar el lead en Supabase.
+    // La columna "phone" ya no se recoge en el formulario, pero se mantiene
+    // NOT NULL en la tabla: usamos un valor de relleno en vez de null.
     const { data, error } = await supabase
       .from('leads')
       .insert([
         {
           name,
-          phone,
+          phone: '1',
           email,
-          clinic: clinic || null,
           revenue: revenue || null,
           challenge: challenge || null,
         },
