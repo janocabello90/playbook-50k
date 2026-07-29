@@ -95,7 +95,7 @@ export default function HomePage() {
                 <em>✓</em> <strong>+ 5 vídeos</strong> formativos incluidos.
               </li>
               <li>
-                <em>✓</em> Descarga inmediata, <strong>100% gratis</strong>.
+                <em>✓</em> Acceso inmediato, <strong>100% gratis</strong>.
               </li>
             </ul>
             <p className="chips-label">Lo que vas a trabajar</p>
@@ -157,7 +157,7 @@ export default function HomePage() {
               </div>
 
               <button className="cta" type="submit" disabled={loading}>
-                {loading ? "Enviando…" : "Quiero acceder al Playbook 50K →"}
+                {loading ? "Enviando…" : "Quiero acceder al Playbook 50K"}
               </button>
 
               {status === "error" && (
@@ -192,7 +192,7 @@ export default function HomePage() {
         <div className="item">
           <span className="stars">★★★★★</span>{" "}
           <span>
-            <strong>+120 clínicas</strong> ya lo están aplicando
+            <strong>+200 clínicas</strong> ya lo están aplicando
           </span>
         </div>
         <div className="sep"></div>
