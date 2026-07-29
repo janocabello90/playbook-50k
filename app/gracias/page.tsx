@@ -11,8 +11,8 @@ export default function GraciasPage() {
           <Image
             src="/fisioreferentes-logo.png"
             alt="fisioreferentes"
-            width={130}
-            height={30}
+            width={150}
+            height={72}
             priority
           />
         </div>
