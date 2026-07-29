@@ -173,8 +173,15 @@ export default function HomePage() {
                 <span>⚡ Acceso inmediato</span>
               </div>
               <div className="author">
-                <i></i> Por Fisioreferentes — ayudamos a dueños de clínicas a
-                vivir mejor.
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://s.w.org/images/core/emoji/17.0.2/svg/2b50.svg"
+                  alt="⭐"
+                  width={28}
+                  height={28}
+                />{" "}
+                Por Fisioreferentes — ayudamos a dueños de clínicas a vivir
+                mejor.
               </div>
             </form>
           </div>

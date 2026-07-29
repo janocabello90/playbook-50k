@@ -282,13 +282,10 @@ body {
   color: var(--ink-soft);
 }
 
-.author i {
+.author img {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(160deg, #0e7c86, #0f2f38);
-  display: inline-block;
-  font-style: normal;
+  flex: none;
 }
 
 /* FRANJA DE PRUEBA SOCIAL */
