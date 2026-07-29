@@ -88,14 +88,23 @@ export default function HomePage() {
             </p>
             <ul className="checks">
               <li>
-                <em>✓</em> <strong>19 ejercicios</strong> accionables desde el
-                primer día.
+                <em>✓</em>
+                <span>
+                  <strong>19 ejercicios</strong> accionables desde el primer
+                  día.
+                </span>
               </li>
               <li>
-                <em>✓</em> <strong>+ 5 vídeos</strong> formativos incluidos.
+                <em>✓</em>
+                <span>
+                  <strong>+ 5 vídeos</strong> formativos incluidos.
+                </span>
               </li>
               <li>
-                <em>✓</em> Acceso inmediato, <strong>100% gratis</strong>.
+                <em>✓</em>
+                <span>
+                  Acceso inmediato, <strong>100% gratis</strong>.
+                </span>
               </li>
             </ul>
             <p className="chips-label">Lo que vas a trabajar</p>

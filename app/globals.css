@@ -119,6 +119,7 @@ body {
 
 .checks li {
   display: flex;
+  align-items: flex-start;
   gap: 10px;
   font-size: 15.5px;
   color: #eafafa;
@@ -129,6 +130,7 @@ body {
 }
 
 .checks li em {
+  flex: none;
   color: var(--accent);
   font-weight: 900;
   font-style: normal;
