@@ -28,7 +28,7 @@ body {
   color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background: linear-gradient(165deg, #0f2f38 0%, #0e7c86 100%);
+  background: #2b3d75;
   min-height: 100vh;
 }
 

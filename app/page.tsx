@@ -24,6 +24,7 @@ export default function HomePage() {
     // Extraer los datos del formulario
     const data = {
       name: String(formData.get("name") || ""),
+      phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
       revenue: String(formData.get("revenue") || ""),
       challenge: String(formData.get("challenge") || ""),
@@ -76,13 +77,15 @@ export default function HomePage() {
           <div className="copy">
             <span className="eyebrow">Gratis · Para dueños de clínica</span>
             <h1>
-              Lleva tu clínica a <span>50.000&nbsp;€</span> al año, rentables
-              y sin quemarte
+              Lleva tu clínica a <span>hasta 150.000&nbsp;€</span> al año,
+              rentables y sin quemarte
             </h1>
             <p className="sub">
               No es facturar por facturar:{" "}
-              <strong>50.000 € al año con un margen de beneficio sano</strong>.
-              Descárgate el <strong>Playbook 50K</strong>, 19 ejercicios
+              <strong>
+                hasta 150.000 € al año con un margen de beneficio sano
+              </strong>
+              . Descárgate el <strong>Playbook 150K</strong>, 19 ejercicios
               prácticos para llegar ahí atrayendo a los pacientes correctos y
               sin vivir pegado a la agenda.
             </p>
@@ -137,6 +140,16 @@ export default function HomePage() {
               </div>
 
               <div className="field">
+                <label>Móvil</label>
+                <input
+                  type="tel"
+                  placeholder="Tu móvil"
+                  name="phone"
+                  required
+                />
+              </div>
+
+              <div className="field">
                 <label>Email</label>
                 <input
                   type="email"
@@ -150,9 +163,9 @@ export default function HomePage() {
                 <label>Facturación aproximada de tu clínica</label>
                 <select name="revenue" defaultValue="">
                   <option value="">Selecciona…</option>
-                  <option value="menos-10000">Menos de 10.000 €/mes</option>
-                  <option value="10000-30000">10.000 – 30.000 €/mes</option>
-                  <option value="mas-30000">Más de 30.000 €/mes</option>
+                  <option value="0-50000">0 – 50.000 €</option>
+                  <option value="50000-100000">50.000 – 100.000 €</option>
+                  <option value="100000-150000">100.000 – 150.000 €</option>
                 </select>
               </div>
 
@@ -166,7 +179,7 @@ export default function HomePage() {
               </div>
 
               <button className="cta" type="submit" disabled={loading}>
-                {loading ? "Enviando…" : "Quiero acceder al Playbook 50K"}
+                {loading ? "Enviando…" : "Quiero acceder al Playbook 150K"}
               </button>
 
               {status === "error" && (

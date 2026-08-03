@@ -5,9 +5,9 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Playbook 50K · fisioreferentes",
+  title: "Playbook 150K · fisioreferentes",
   description:
-    "Playbook gratuito para dueños de clínicas de fisioterapia que quieren facturar 50.000€ con estabilidad, recurrencia y paz mental.",
+    "Playbook gratuito para dueños de clínicas de fisioterapia que quieren facturar hasta 150.000€ con estabilidad, recurrencia y paz mental.",
 };
 
 export default function RootLayout({
