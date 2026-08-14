@@ -166,6 +166,7 @@ export default function HomePage() {
                   <option value="0-50000">0 – 50.000 €</option>
                   <option value="50000-100000">50.000 – 100.000 €</option>
                   <option value="100000-150000">100.000 – 150.000 €</option>
+                  <option value="mas-150000">Más de 150.000 €</option>
                 </select>
               </div>
 
