@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { FacebookPixel } from "@/components/FacebookPixel";
+import { FacebookPixel, FacebookPixelLead } from "@/components/FacebookPixel";
 
 export default function GraciasPage() {
   return (
     <div className="squeeze">
-      <FacebookPixel trackLead />
+      <FacebookPixel />
+      <FacebookPixelLead />
 
       <div className="squeeze-top">
         <div className="brand">

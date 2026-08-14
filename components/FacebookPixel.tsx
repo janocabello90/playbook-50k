@@ -2,10 +2,13 @@ import Script from "next/script";
 
 const PIXEL_ID = "417932844179971";
 
-// Código base del píxel de Meta. Se usa en la home y en /gracias
-// (nunca en /admin). El evento Lead se añade al mismo script para
-// garantizar que fbq ya está inicializado cuando se dispara.
-export function FacebookPixel({ trackLead = false }: { trackLead?: boolean }) {
+// Código base del píxel de Meta (init + PageView). Se usa en la home y en
+// /gracias (nunca en /admin). El id del script es fijo a propósito: Next.js
+// deduplica por id, así que si el usuario navega de la home a /gracias sin
+// recargar (navegación cliente, p. ej. tras enviar el formulario), este
+// script no se vuelve a insertar — por eso el evento Lead NO puede vivir
+// aquí dentro (ver FacebookPixelLead más abajo).
+export function FacebookPixel() {
   return (
     <>
       <Script id="fb-pixel-base" strategy="afterInteractive">
@@ -20,7 +23,6 @@ export function FacebookPixel({ trackLead = false }: { trackLead?: boolean }) {
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '${PIXEL_ID}');
           fbq('track', 'PageView');
-          ${trackLead ? "fbq('track', 'Lead');" : ""}
         `}
       </Script>
       <noscript>
@@ -34,5 +36,19 @@ export function FacebookPixel({ trackLead = false }: { trackLead?: boolean }) {
         />
       </noscript>
     </>
+  );
+}
+
+// Evento Lead, exclusivo de /gracias. Va en un script con id propio
+// (distinto de "fb-pixel-base") para que Next.js SIEMPRE lo ejecute al
+// entrar en /gracias, sea navegación completa o navegación cliente desde
+// la home. fbq ya existe en window para ese momento (lo define
+// FacebookPixel, que se monta antes en el árbol), pero se comprueba por
+// seguridad.
+export function FacebookPixelLead() {
+  return (
+    <Script id="fb-pixel-lead" strategy="afterInteractive">
+      {`window.fbq && window.fbq('track', 'Lead');`}
+    </Script>
   );
 }
