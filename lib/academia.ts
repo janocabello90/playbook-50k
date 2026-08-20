@@ -2,26 +2,13 @@
 // al lead a crear su cuenta gratuita. Esta llamada se hace SIEMPRE desde el
 // servidor: la API key no debe llegar nunca al navegador del usuario.
 
+import { splitFullName } from './name';
+
 const ACADEMIA_LEAD_API_URL = "https://knaas.vercel.app/api/external/playbook-lead";
 
 // Timeout defensivo: si la Academia tarda o no responde, no queremos dejar
 // la petición del usuario colgada esperando indefinidamente.
 const ACADEMIA_TIMEOUT_MS = 8000;
-
-function splitFullName(fullName: string): { firstName: string; lastName: string } {
-  const trimmed = fullName.trim().replace(/\s+/g, " ");
-  const [firstName, ...rest] = trimmed.split(" ");
-  const lastName = rest.join(" ");
-
-  // La Academia exige firstName y lastName como campos no vacíos. El nuevo
-  // formulario solo pide "Nombre" (sin apellido), así que si no hay apellido
-  // mandamos "-" en vez de "" — de lo contrario la API responde 400 y el
-  // lead nunca llega a invitarse.
-  return {
-    firstName: firstName || trimmed,
-    lastName: lastName || '-',
-  };
-}
 
 type NotifyAcademiaResult =
   | { ok: true; outcome: "invited" | "existing_user_notified" }
@@ -35,7 +22,11 @@ export async function notifyAcademia(email: string, fullName: string): Promise<N
     return { ok: false, error: "PLAYBOOK_LEADS_API_KEY no configurada" };
   }
 
-  const { firstName, lastName } = splitFullName(fullName);
+  const { firstName, lastName: rawLastName } = splitFullName(fullName);
+  // La Academia exige firstName y lastName como campos no vacíos. Si no hay
+  // apellido mandamos "-" en vez de "" — de lo contrario la API responde
+  // 400 y el lead nunca llega a invitarse.
+  const lastName = rawLastName || '-';
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), ACADEMIA_TIMEOUT_MS);
 

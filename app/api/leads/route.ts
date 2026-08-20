@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { notifyAcademia } from '@/lib/academia';
+import { addToActiveCampaign } from '@/lib/activecampaign';
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,6 +46,13 @@ export async function POST(request: NextRequest) {
     const academiaResult = await notifyAcademia(email, name);
     if (!academiaResult.ok) {
       console.error('⚠️ No se pudo invitar al lead a la Academia (no crítico):', academiaResult.error);
+    }
+
+    // Dar de alta al lead en ActiveCampaign (lista Playbook 150K). Si falla,
+    // lo logueamos pero no hacemos fallar el guardado del lead.
+    const activeCampaignResult = await addToActiveCampaign(email, name, phone);
+    if (!activeCampaignResult.ok) {
+      console.error('⚠️ No se pudo dar de alta el lead en ActiveCampaign (no crítico):', activeCampaignResult.error);
     }
 
     return NextResponse.json({
