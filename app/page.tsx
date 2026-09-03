@@ -184,9 +184,7 @@ export default function HomePage() {
                 <input type="checkbox" name="whatsappConsent" />
                 <span>
                   Sí, quiero recibir un <strong>WhatsApp de seguimiento</strong>{" "}
-                  48 horas después de descargar el Playbook, con contenido
-                  relacionado con este programa. Es opcional: si no la marcas,
-                  igualmente recibirás tus credenciales de acceso.
+                  48h después de descargar el Playbook.
                 </span>
               </label>
 
