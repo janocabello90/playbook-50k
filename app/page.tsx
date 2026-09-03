@@ -28,6 +28,7 @@ export default function HomePage() {
       email: String(formData.get("email") || ""),
       revenue: String(formData.get("revenue") || ""),
       challenge: String(formData.get("challenge") || ""),
+      whatsappConsent: formData.get("whatsappConsent") === "on",
     };
 
     try {
@@ -178,6 +179,16 @@ export default function HomePage() {
                   name="challenge"
                 />
               </div>
+
+              <label className="consent-check">
+                <input type="checkbox" name="whatsappConsent" />
+                <span>
+                  Sí, quiero recibir un <strong>WhatsApp de seguimiento</strong>{" "}
+                  48 horas después de descargar el Playbook, con contenido
+                  relacionado con este programa. Es opcional: si no la marcas,
+                  igualmente recibirás tus credenciales de acceso.
+                </span>
+              </label>
 
               <button className="cta" type="submit" disabled={loading}>
                 {loading ? "Enviando…" : "Quiero acceder al Playbook 150K"}

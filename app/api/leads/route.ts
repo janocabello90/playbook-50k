@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const { name, phone, email, revenue, challenge } = body;
+    const { name, phone, email, revenue, challenge, whatsappConsent } = body;
 
     // Validar campos requeridos
     if (!name || !phone || !email) {
@@ -17,7 +17,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Guardar el lead en Supabase
+    // Guardar el lead en Supabase.
+    // whatsapp_consent: consentimiento explícito y opcional para mandar un
+    // WhatsApp de seguimiento a las 48h. Su gestión de envío es aparte (BD
+    // propia); aquí solo se guarda la respuesta y, si la dio, el momento
+    // exacto en que la dio (whatsapp_consent_at), para dejar constancia
+    // clara del consentimiento de cara a RGPD.
+    const hasWhatsappConsent = Boolean(whatsappConsent);
     const { data, error } = await supabase
       .from('leads')
       .insert([
@@ -27,6 +33,8 @@ export async function POST(request: NextRequest) {
           email,
           revenue: revenue || null,
           challenge: challenge || null,
+          whatsapp_consent: hasWhatsappConsent,
+          whatsapp_consent_at: hasWhatsappConsent ? new Date().toISOString() : null,
         },
       ])
       .select()
