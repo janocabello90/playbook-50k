@@ -3,6 +3,7 @@
 // servidor: la API key no debe llegar nunca al navegador del usuario.
 
 import { splitFullName } from './name';
+import { formatSpanishPhone } from './phone';
 
 const ACADEMIA_LEAD_API_URL = "https://knaas.vercel.app/api/external/playbook-lead";
 
@@ -14,7 +15,12 @@ type NotifyAcademiaResult =
   | { ok: true; outcome: "invited" | "existing_user_notified" }
   | { ok: false; error: string };
 
-export async function notifyAcademia(email: string, fullName: string): Promise<NotifyAcademiaResult> {
+export async function notifyAcademia(
+  email: string,
+  fullName: string,
+  phone: string,
+  whatsappConsent: boolean
+): Promise<NotifyAcademiaResult> {
   const apiKey = process.env.PLAYBOOK_LEADS_API_KEY;
 
   if (!apiKey) {
@@ -37,7 +43,13 @@ export async function notifyAcademia(email: string, fullName: string): Promise<N
         "Content-Type": "application/json",
         "x-api-key": apiKey,
       },
-      body: JSON.stringify({ email, firstName, lastName }),
+      body: JSON.stringify({
+        email,
+        firstName,
+        lastName,
+        phone: formatSpanishPhone(phone),
+        whatsappConsent,
+      }),
       signal: controller.signal,
     });
 

@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     // Invitar al lead a la Academia FisioReferentes (knaas.vercel.app).
     // Es su API la que envía el email de acceso; si falla, lo logueamos
     // pero no hacemos fallar el guardado del lead.
-    const academiaResult = await notifyAcademia(email, name);
+    const academiaResult = await notifyAcademia(email, name, phone, hasWhatsappConsent);
     if (!academiaResult.ok) {
       console.error('⚠️ No se pudo invitar al lead a la Academia (no crítico):', academiaResult.error);
     }
